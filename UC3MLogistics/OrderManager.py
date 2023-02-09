@@ -1,16 +1,35 @@
 import json
-from .OrderMangementException import OrderManagementException
-from .OrderRequest import OrderRequest
+import re
+##from .OrderMangementException import OrderManagementException
+##from .OrderRequest import OrderRequest
+
 
 class OrderManager:
     def __init__(self):
         pass
 
-    def ValidateEAN13( self, eAn13:str) -> bool:
-        # PLEASE INCLUDE HERE THE CODE FOR VALIDATING THE GUID
-        # RETURN TRUE IF THE GUID IS RIGHT, OR FALSE IN OTHER CASE
-        return True
+def ValidateEAN13(eAn13:str) -> bool:
 
+
+    x = (re.search("^[0-9]{13}$", eAn13))
+    # PLEASE INCLUDE HERE THE CODE FOR VALIDATING THE GUID
+    # RETURN TRUE IF THE GUID IS RIGHT, OR FALSE IN OTHER CASE
+    digit_counter = 1
+    suma = 0
+    while digit_counter < 13:
+        par = digit_counter % 2 == 0
+        if not par:
+            suma += eAn13[digit_counter]
+        else:
+            suma += eAn13[digit_counter]*3
+
+    if not x:
+        return False
+    print(x)
+    return True
+print(ValidateEAN13("1234567891123"))
+
+"""
     def ReadproductcodefromJSON(self, fi: str) -> None: # DUDA AQUI PREGUNTAR
 
         try:
@@ -33,3 +52,4 @@ class OrderManager:
 
         # Close the file
         return req
+        """
