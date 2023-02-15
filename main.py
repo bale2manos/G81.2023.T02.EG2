@@ -30,7 +30,7 @@ def Decode(word):
 
 def main():
     mng = OrderManager()
-    res = mng.ReadproductcodefromJSON("test.json")
+    res = mng.ReadproductcodefromJSON("test_valid.json")
     strRes = res.__str__()
     print(strRes)
     EncodeRes = Encode(strRes)

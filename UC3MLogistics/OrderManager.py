@@ -8,7 +8,7 @@ class OrderManager:
     def __init__(self):
         pass
 
-    def ValidateEAN13(eAn13:str) -> bool:
+    def ValidateEAN13(self, eAn13:str) -> bool:
         """This function validates an EAN13 barcode"""
         valid_structure = (re.search("^[0-9]{13}$", eAn13))
         if not valid_structure:
