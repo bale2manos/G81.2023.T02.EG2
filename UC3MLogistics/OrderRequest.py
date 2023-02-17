@@ -1,27 +1,36 @@
+"""
+Autores:    Miguel Lucena Belmonte (XXXXXXXXXXX)
+            Javier Pallarés de Bonrostro (100472252)
+Fecha: 17/02/2023
+Curso: Desarrollo de Software
+Descripción: Crear un pedido nuevo
+"""
+
 import json
 from datetime import datetime
 
 
 class OrderRequest:
+    """Crear pedido con los atributos necesarios"""
     def __init__( self, idcode, phoneNumber ):
-        self.__phoneNumber = phoneNumber
-        self.__idcode = idcode
+        self.phoneNumber = phoneNumber #TODO igual que antes quitar __ valido?
+        self.idCode = idcode
         justnow = datetime.utcnow()
-        self.__timeStamp = datetime.timestamp(justnow)
+        self.timeStamp = datetime.timestamp(justnow)
 
     def __str__(self):
         return "OrderRequest:" + json.dumps(self.__dict__)
 
     @property
-    def Phone( self ):
-        return self.__phoneNumber
-    @Phone.setter
-    def Phone( self, value ):
-        self.__phoneNumber = value
+    def phone( self ):
+        return self.phoneNumber
+    @phone.setter
+    def phone( self, value ):
+        self.phoneNumber = value
 
     @property
-    def PRODUCT_CODE( self ):
-        return self.__idcode
-    @PRODUCT_CODE.setter
-    def PRODUCT_CODE( self, value ):
-        self.__idcode = value
+    def productCode( self ):
+        return self.idCode
+    @productCode.setter
+    def productCode( self, value ):
+        self.idCode = value

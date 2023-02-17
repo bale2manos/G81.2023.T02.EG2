@@ -1,58 +1,70 @@
+"""
+Autores:    Miguel Lucena Belmonte (XXXXXXXXXXX)
+            Javier Pallarés de Bonrostro (100472252)
+Fecha: 17/02/2023
+Curso: Desarrollo de Software
+Descripción: Encargado de gestionar los pedidos
+"""
+
 import json
 import re
-from .OrderMangementException import OrderManagementException # TODO solve this
+from .OrderMangementException import OrderManagementException
 from .OrderRequest import OrderRequest
 
 
+
 class OrderManager:
+    """Gestión de pedidos"""
     def __init__(self):
         pass
 
-    def ValidateEAN13(self, eAn13: str) -> bool:
+    def validate_ean13(self, eAn13: str) -> bool:
         """This function validates an EAN13 barcode"""
-        valid_structure = (re.search("^[0-9]{13}$", eAn13))
-        if not valid_structure:
+        validStructure = re.search("^[0-9]{13}$", eAn13)
+        if not validStructure:
             return False
 
-        digit_counter = 1
-        sum = 0
-        while digit_counter <= 12:
-            par_position = (digit_counter % 2 == 0)
-            digit = int(eAn13[digit_counter - 1])
-            if par_position:
-                sum += digit * 3
+        digitCounter = 1
+        sumTotal = 0
+        while digitCounter <= 12:
+            parPosition = digitCounter % 2 == 0
+            digit = int(eAn13[digitCounter - 1])
+            if parPosition:
+                sumTotal += digit * 3
             else:
-                sum += digit
-            digit_counter += 1
+                sumTotal += digit
+            digitCounter += 1
 
-        mod = sum % 10
-        check_digit = 10 - mod
-        if check_digit == 10:
-            check_digit = 0
+        mod = sumTotal % 10
+        checkDigit = 10 - mod
+        if checkDigit == 10:
+            checkDigit = 0
 
-        if check_digit != int(eAn13[12]):
+        if checkDigit != int(eAn13[12]):
             return False
         return True
 
-    def ReadproductcodefromJSON(self, fi: str) -> None: # DUDA AQUI PREGUNTAR cual es el return
+    def read_product_code_from_json(self, fileName: str) -> None: # return?
+        """Lee el código del producto desde un archivo JSON"""
+        try:
+            with open(fileName) as file:
+                data = json.load(file)
+        except FileNotFoundError as error:
+            raise OrderManagementException("Wrong file or file path") from error
+        except json.JSONDecodeError as error:
+            raise OrderManagementException("JSON Decode Error - "
+                                           "Wrong JSON Format") from error
+
 
         try:
-            with open(fi) as f:
-                DATA = json.load(f)
-        except FileNotFoundError as e:
-            raise OrderManagementException("Wrong file or file path") from e
-        except json.JSONDecodeError as e:
-            raise OrderManagementException("JSON Decode Error - Wrong JSON Format") from e
-
-
-        try:
-            PRODUCT = DATA["id"]
-            PH = DATA["phoneNumber"]
-            req = OrderRequest(PRODUCT, PH)
-        except KeyError as e:
-            raise OrderManagementException("JSON Decode Error - Invalid JSON Key") from e
-        if not self.ValidateEAN13(PRODUCT):
-            raise OrderManagementException("Invalid PRODUCT code")
+            product = data["id"]
+            phoneNumber = data["phoneNumber"]
+            req = OrderRequest(product, phoneNumber)
+        except KeyError as error:
+            raise OrderManagementException("JSON Decode Error - "
+                                           "Invalid JSON Key") from error
+        if not self.validate_ean13(product):
+            raise OrderManagementException("Invalid product code")
 
         # Close the file
         return req
