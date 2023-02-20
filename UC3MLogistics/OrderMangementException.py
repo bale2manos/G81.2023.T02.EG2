@@ -11,13 +11,13 @@ class OrderManagementException(Exception):
     """Manejar las excepciones del gestor de pedidos"""
 
     def __init__(self, message):
-        self.message = message
-        super().__init__(self.message)
+        self.__message = message
+        super().__init__(self.__message)
 
     @property
     def message(self):
-        return self.message  # TODO duda si valido sin __
+        return self.__message  # TODO duda si valido sin __
 
     @message.setter
     def message(self, value):
-        self.message = value
+        self.__message = value

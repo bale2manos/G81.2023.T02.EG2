@@ -39,18 +39,21 @@ def decode(word):
 def main():
     """Código principal del programa"""
     mng = OrderManager()
-    res = mng.read_product_code_from_json("test_valid.json")
-    #strRes = res.__str__() esto se puede sustituir por lo de abajo?
-    strRes = str(res)
-    print(strRes)
-    encodeRes = encode(strRes)
-    print("Encoded Res "+ encodeRes)
-    decodeRes = decode(encodeRes)
-    print("Decoded Res: " + decodeRes) # TODO hay q hacerlo para el codigo malo y el bueno
-    print("Codew: " + res.productCode)
-    with open("./barcodeEan13.jpg", 'wb') as fileImage:
-        imageWriter = ImageWriter()
-        EAN13(res.productCode, writer=imageWriter).write(fileImage)
+    listFiles = ["test_valid.json", "test_invalid.json"]
+    for file in listFiles:
+        res = mng.read_product_code_from_json(file)
+        #strRes = res.__str__() esto se puede sustituir por lo de abajo?
+        strRes = str(res)
+        print(strRes)
+        encodeRes = encode(strRes)
+        print("Encoded Res "+ encodeRes)
+        decodeRes = decode(encodeRes)
+        print("Decoded Res: " + decodeRes) # TODO hay q hacerlo para el codigo malo y el bueno
+        print("Codew: " + res.productCode)
+        with open("./barcodeEan13.jpg", 'wb') as fileImage:
+            imageWriter = ImageWriter()
+            EAN13(res.productCode, writer=imageWriter).write(fileImage)
+
 
 
 if __name__ == "__main__":

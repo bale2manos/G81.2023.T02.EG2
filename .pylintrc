@@ -344,7 +344,7 @@ single-line-class-stmt=no
 
 # Allow the body of an if to be on the same line as the test if there is no
 # else.
-single-line-if-stmt=yes
+single-line-if-stmt= yes
 
 
 [IMPORTS]
@@ -503,7 +503,7 @@ ignore-imports=yes
 ignore-signatures=yes
 
 # Minimum lines number of a similarity.
-min-similarity-lines=3
+min-similarity-lines=4
 
 
 [SPELLING]
