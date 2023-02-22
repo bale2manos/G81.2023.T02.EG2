@@ -14,7 +14,7 @@ from UC3MLogistics import OrderManager
 LETTERS = string.ascii_letters + string.punctuation + string.digits
 SHIFT = 3
 
-def encode(word):
+def encode(word: str):
     """Codifica la palabra indicada"""
     encoded = ""
     for letter in word:
@@ -25,7 +25,7 @@ def encode(word):
             encoded = encoded + LETTERS[letterEncoded]
     return encoded
 
-def decode(word):
+def decode(word: str):
     """Descodifica la palabra indicada"""
     encoded = ""
     for letter in word:

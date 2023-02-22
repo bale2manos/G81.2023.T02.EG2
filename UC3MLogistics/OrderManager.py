@@ -18,9 +18,9 @@ class OrderManager:
     def __init__(self):
         pass
 
-    def validate_ean13(self, eAn13: str) -> bool:
+    def validate_ean13(self, ean13: str) -> bool:
         """This function validates an EAN13 barcode"""
-        validStructure = re.search("^[0-9]{13}$", eAn13)
+        validStructure = re.search("^[0-9]{13}$", ean13)
         if not validStructure:
             return False
 
@@ -28,7 +28,7 @@ class OrderManager:
         sumTotal = 0
         while digitCounter <= 12:
             parPosition = digitCounter % 2 == 0
-            digit = int(eAn13[digitCounter - 1])
+            digit = int(ean13[digitCounter - 1])
             if parPosition:
                 sumTotal += digit * 3
             else:
@@ -40,11 +40,11 @@ class OrderManager:
         if checkDigit == 10:
             checkDigit = 0
 
-        if checkDigit != int(eAn13[12]):
+        if checkDigit != int(ean13[12]):
             return False
         return True
 
-    def read_product_code_from_json(self, fileName: str) -> None: # return?
+    def read_product_code_from_json(self, fileName: str): # TODO return?
         """Lee el código del producto desde un archivo JSON"""
         try:
             with open(fileName) as file:
