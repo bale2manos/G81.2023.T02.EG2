@@ -48,7 +48,7 @@ def main():
         encodeRes = encode(strRes)
         print("Encoded Res "+ encodeRes)
         decodeRes = decode(encodeRes)
-        print("Decoded Res: " + decodeRes) # TODO hay q hacerlo para el codigo malo y el bueno
+        print("Decoded Res: " + decodeRes)
         print("Codew: " + res.productCode)
         with open("./barcodeEan13.jpg", 'wb') as fileImage:
             imageWriter = ImageWriter()

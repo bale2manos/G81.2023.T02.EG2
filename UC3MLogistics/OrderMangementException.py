@@ -16,7 +16,7 @@ class OrderManagementException(Exception):
 
     @property
     def message(self):
-        return self.__message  # TODO duda si valido sin __
+        return self.__message
 
     @message.setter
     def message(self, value):

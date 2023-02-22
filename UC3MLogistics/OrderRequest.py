@@ -13,7 +13,7 @@ from datetime import datetime
 class OrderRequest:
     """Crear pedido con los atributos necesarios"""
     def __init__(self, idCode: str, phoneNumber: str):
-        self.__phoneNumber = phoneNumber #TODO igual que antes quitar __ valido?
+        self.__phoneNumber = phoneNumber
         self.__idCode = idCode
         justNow = datetime.utcnow()
         self.__timeStamp = datetime.timestamp(justNow)

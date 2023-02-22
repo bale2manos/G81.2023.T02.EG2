@@ -8,10 +8,8 @@ Descripción: Encargado de gestionar los pedidos
 
 import json
 import re
-from .OrderMangementException import OrderManagementException
-from .OrderRequest import OrderRequest
-
-
+from UC3MLogistics.OrderMangementException import OrderManagementException
+from UC3MLogistics.OrderRequest import OrderRequest
 
 class OrderManager:
     """Gestión de pedidos"""
@@ -44,7 +42,7 @@ class OrderManager:
             return False
         return True
 
-    def read_product_code_from_json(self, fileName: str): # TODO return?
+    def read_product_code_from_json(self, fileName: str):
         """Lee el código del producto desde un archivo JSON"""
         try:
             with open(fileName, encoding='UTF-8') as file:
