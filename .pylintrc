@@ -121,7 +121,7 @@ attr-naming-style=camelCase
 # Regular expression matching correct attribute names. Overrides attr-naming-
 # style. If left empty, attribute names will be checked with the set naming
 # style.
-#attr-rgx=
+attr-rgx=^(__)?([a-zA-Z]+[a-z0-9]*)+$
 
 # Bad variable names which should always be refused, separated by a comma.
 bad-names=foo,
@@ -136,7 +136,7 @@ bad-names=foo,
 
 # Bad variable names regexes, separated by a comma. If names match any regex,
 # they will always be refused
-bad-names-rgxs=\w{1,2}
+bad-names-rgxs=\w{1,2}$
 
 # Naming style matching correct class attribute names.
 class-attribute-naming-style=camelCase

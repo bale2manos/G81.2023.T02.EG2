@@ -47,7 +47,7 @@ class OrderManager:
     def read_product_code_from_json(self, fileName: str): # TODO return?
         """Lee el código del producto desde un archivo JSON"""
         try:
-            with open(fileName) as file:
+            with open(fileName, encoding='UTF-8') as file:
                 data = json.load(file)
         except FileNotFoundError as error:
             raise OrderManagementException("Wrong file or file path") from error
